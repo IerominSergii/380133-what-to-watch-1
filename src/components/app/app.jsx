@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
 const App = (props) => {
-  return <Main names={props.movieNames} />;
+  const {movieNames, onClick} = props;
+  return <Main names={movieNames} onClick={onClick} />;
 };
 
 export default App;
 
 App.propTypes = {
-  movieNames: PropTypes.array
+  movieNames: PropTypes.array.isRequired,
+  onClick: PropTypes.func
 };
