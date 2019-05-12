@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CatalogMoviesList from "../catalog-movies-list/catalog-movies-list.jsx";
 
 const Main = (props) => {
-  const {names, onClick} = props;
+  const {films, onClick} = props;
+
   return (
     <div>
       <section className="movie-card">
@@ -137,36 +139,7 @@ const Main = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {names.map((movie, index) => {
-              return (
-                <article
-                  key={movie + index}
-                  className="small-movie-card catalog__movies-card"
-                >
-                  <button className="small-movie-card__play-btn" type="button">
-                    Play
-                  </button>
-                  <div className="small-movie-card__image">
-                    <img
-                      src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                      alt="Fantastic Beasts: The Crimes of Grindelwald"
-                      width="280"
-                      height="175"
-                    />
-                  </div>
-                  <h3 className="small-movie-card__title">
-                    <a
-                      className="small-movie-card__link"
-                      href="movie-page.html"
-                    >
-                      {movie}
-                    </a>
-                  </h3>
-                </article>
-              );
-            })}
-          </div>
+          <CatalogMoviesList films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">
@@ -182,6 +155,6 @@ const Main = (props) => {
 export default Main;
 
 Main.propTypes = {
-  names: PropTypes.array.isRequired,
+  films: PropTypes.array.isRequired,
   onClick: PropTypes.func
 };
