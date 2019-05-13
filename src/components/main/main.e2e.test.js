@@ -2,14 +2,15 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
+import {films} from "../../mocks/films";
 
 Enzyme.configure({adapter: new Adapter()});
-const names = [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`];
-const clickHandler = jest.fn();
-const main = shallow(<Main names={names} onClick={clickHandler} />);
+const onClick = jest.fn();
+
+const main = shallow(<Main films={films} onClick={onClick} />);
 const cardTitle = main.find(`.movie-card__title`);
 
-describe(`Enxyme App:`, () => {
+describe(`Enzyme App:`, () => {
   it(`should contain the title`, () => {
     expect(cardTitle).toHaveLength(1);
   });
@@ -17,6 +18,6 @@ describe(`Enxyme App:`, () => {
   it(`should render App correctly`, () => {
     cardTitle.simulate(`click`, {preventDefault() {}});
 
-    expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 });
