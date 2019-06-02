@@ -1,14 +1,16 @@
 import React from "react";
 import {PropTypes} from "prop-types";
+import VideoPlayer from "../video-player/video-player.jsx";
 
 const MovieCardSmall = (props) => {
   const {
     id,
+    src,
     imagePath,
     title,
+    activeMovieId,
     onMouseOver: mouseOverHandler,
-    onMouseOut: mouseOutHandler,
-    onPlayClick
+    onMouseOut: mouseOutHandler
   } = props;
 
   return (
@@ -18,15 +20,12 @@ const MovieCardSmall = (props) => {
       onMouseOver={mouseOverHandler}
       onMouseOut={mouseOutHandler}
     >
-      <button
-        className="small-movie-card__play-btn"
-        type="button"
-        onClick={onPlayClick}
-      >
-        Play
-      </button>
       <div className="small-movie-card__image">
-        <img src={`img/${imagePath}`} alt={title} width="280" height="175" />
+        <VideoPlayer
+          src={src}
+          posterSrc={imagePath}
+          isPlaying={activeMovieId === id}
+        />
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">
@@ -41,9 +40,10 @@ export default MovieCardSmall;
 
 MovieCardSmall.propTypes = {
   id: PropTypes.number.isRequired,
+  src: PropTypes.string.isRequired,
   imagePath: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  activeMovieId: PropTypes.number,
   onMouseOver: PropTypes.func,
-  onMouseOut: PropTypes.func,
-  onPlayClick: PropTypes.func
+  onMouseOut: PropTypes.func
 };

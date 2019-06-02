@@ -6,11 +6,10 @@ class CatalogMoviesList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      activeMovieId: null
+      activeMovieId: 0
     };
     this.mouseOverHandle = this.mouseOverHandle.bind(this);
     this.mouseOutHandle = this.mouseOutHandle.bind(this);
-    this.playClickHandler = this.playClickHandler.bind(this);
   }
 
   setActiveMovie(movieId) {
@@ -18,7 +17,7 @@ class CatalogMoviesList extends PureComponent {
   }
 
   removeActiveMovie() {
-    this.setState({activeMovieId: null});
+    this.setState({activeMovieId: 0});
   }
 
   mouseOverHandle(evt) {
@@ -40,12 +39,9 @@ class CatalogMoviesList extends PureComponent {
     }
   }
 
-  playClickHandler() {
-    return this.props.films[this.state.activeMovieId];
-  }
-
   render() {
     const {films} = this.props;
+    const {activeMovieId} = this.state;
 
     return (
       <div className="catalog__movies-list">
@@ -53,12 +49,13 @@ class CatalogMoviesList extends PureComponent {
           return (
             <MovieCardSmall
               key={film.id}
+              src={film.src}
               id={film.id}
               imagePath={film.imagePath}
               title={film.title}
+              activeMovieId={activeMovieId}
               onMouseOver={this.mouseOverHandle}
               onMouseOut={this.mouseOutHandle}
-              onPlayClick={this.playClickHandler}
             />
           );
         })}
